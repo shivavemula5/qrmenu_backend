@@ -1,0 +1,367 @@
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+(React = use smallcase for folder names and capital case for file names)
+
+QR Menu Builder (For Restaurants) :  
+--------------------------------------------
+
+1.A personalised digital menu for each table where users can view the menu via scanner and have a look at items available in the restaurant and 
+  can order them as well
+
+2.Project Structure : 
+  Backend  : Django 
+  Frontend : React 
+
+3.The main functions of backend are creating API's that connect to the db and doing tasks like creating , updating and deleting the data , on the 
+  other hand i.e frontend we will be using react to build components that comminicate with the backdend API 
+
+4.Install git + python + vscode + JSON View (extension for google) 
+
+5.Create the virtual environment
+
+6.cmd   : python -m venv qrmenuenv
+
+7.Activate the virtual environment
+
+8.cmd   : pip install django 
+
+9.cmd   : django-admin startproject qrmenu_backend
+
+10.cmd  : python manage.py makemigrations
+
+11.cmd  : python manage.py migrate 
+
+12.cmd  : python manage.py runserver
+
+13.Django comes in with a default user authentication system for the admin , to be able to use it we need to migrate and run the default db tables 
+   , the warnings that has occurred initially indicates the same   
+
+14.cmd  : python manage.py createsuperuser
+
+15.cmd  : username : admin 
+
+16.cmd  : password : admin
+
+17.cmd  : python manage.py startapp core 
+
+18.Add core app to the list of installed apps in settings.py file 
+
+19.We will be using a third party library called djoser which provides us the set of django rest framework views to handle the basic actions such 
+   as login , logout , password reset and account activation so on i.e we dont want to reinvent the wheel
+
+20:cmd : pip install djoser 
+
+21.Add djoser to the list of installed apps in settings.py file
+
+22.djoser has a list of dependencies i.e rest_framework , rest_framework.authtoken and add these as well to the list of installed apps in 
+   settings.py file
+
+23.Add the default authentication classes configuartion in the settings.py file
+
+24.Provide the urls and views for the rest framework defined by djoser
+   
+   (i.e these views are prewritten as a part of djoser library and we are simply utilizing those views) 
+
+25.Once the configuration is complete we need to migrate the changes made to db because djoser creates few custom tables in the db
+
+26.cmd : pip freeze > requirements.txt
+   It creates a new file named requirements.txt containing all our project dependencies , if you share this whole project with anyone they first
+   have to run the requirements.txt file to install all the project dependencies and can then run the project 
+
+27.Comitting code to github via VScode : 
+  Create a .gitignore file 
+  Here we will be adding few files and contents which we dont want to commit to the github asthey are very specific to the project 
+  Here all the files having such extensions /patterns or names will be skipped during thecommit operation
+
+28.cmd : git init 
+   i.e Basically we have initialized a git repository for our project  
+
+29.Click on the cloud icon (publish to github) which is on the bottom of the screen (VScode)
+
+30.signin to the github , allow access to vscode ,then it redirects us to the vscode , here we have two options i.e 
+  1.publish to github private repository 
+  2.publish to github public repository
+select option 1
+31.Can't push refs to remote. Try running Pull first to integrate your changes.
+32.click on git symbol on the left panel : 
+click on changes + 
+Type Initialize project (message)
+we have to do that first (i.e commiting changes before pushing/uploading)
+33.Now click on the upload icon below
+34.Now our project is finally uploaded to the github , now we can commit the code to the github directly from the working folder in vscode 
+35.steps  : git init 
+    in    : Click on git symbol 
+   short    Click on + symbol     
+            Add a message 
+          : click commit 
+          : click on upload icon 
+36.Install Node.js
+37.cmd : create-react-app qrmenu_frontend [or]
+         npm init react-app qrmenu_frontend --script-version 4.0.3
+                           (name of project)
+38.cmd : npm start
+39.open src and Remove : App.css
+                         App.js
+                         App.test.js
+                         logo.svg
+                         setupTests.js
+                         reportWebVitals.js 
+40.Now we will be installing the react-router-dom library which helps us in handling routes in a react application       
+41.cmd : npm i react-router-dom@5.2.0 -s 
+   -s means we would like to save this library and its version in the package.json file 
+42.We are going to create 2 files(pages actually) for our react application named home and login 
+43.Pages 
+    Home.js 
+    Login.js 
+44.If you are removing all the icons from teh public folder then make sure you all the icon traces in the manifest file as well 
+45.cmd : npm i react-bootstrap@1.5.2 bootstrap@4.6.0 -s
+   We are basically installing 2 dependencies react-bootstrap and bootstrap 
+46.index.js  :  import "bootstrap/dist/css/bootstrap.min.css"
+   (once imported here , we dont have to import it anywhere within the other files)
+47.We will be importing the google fonts inside the index.html file 
+48.Now we are going to create the main layout for the whole application 
+layout
+  MainLayout.js
+49.Note earlier we have installed 2 dependencies i.e bootstrap and react-bootstrap , generally bootstrap provides its support for the class names that we use for the html elements but with react-bootstrap we can literally render components i.e 
+import navbar from 'react-bootstrap'
+50.We can refer to the website "https://react-bootstsrap.github.io" to learn more about , how to use components of bootstrap via react 
+(Its simply the bootstrap code moduled and available as a react component)
+51.Learn about useLocation , useHistory , .....  hooks available in the react-router-dom
+(What are the trade offs between nvaigating to a different page using anchor tag and nvaigating to a different page using history,replace() ?)
+52.Note that props and children are placed at different places (children is something that is specified between the tags and props is something placed as a part of tag)
+53.cmd : npm i raect-toastify@7.0.3 -s
+54.index.js = import "react-toastify/dist/ReactToastify.css"
+The path and all its related files are present in the node modules folder 
+55.App.js  = import {ToastContainer} from 'react-toastify'
+56.We will be creating a login and registration page allowing the users to register for a new account / login into an account 
+  1.If we click on places Nav we will be redirected to login page because it is a protected/private route that has information that authenticated users have access to 
+  2.You get a toast message if you enter an incorrect password / username 
+  3.Also the login and register links are replaced with the logout link once the user has successfully logged into the account
+  4.After logout the user will be redirected back to the login page
+  5.In these tasks we will learn about how to create react-contexts and use hooks to share data easily across the different react components ,i.e we will share the authenticated token among the components , we will also learn how to create the public and private routes between different pages in a react application , and you will also learn how to revise your function to make a request to an API end point and get the data from the server
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+57.Create a git repository for the frontend i.e 
+  1.git init
+  2.click on git symbol 
+    click on + icon 
+    give a message 
+    commit 
+  3.upload 
+58.Now from our login page we are going to call the Login API of the server to authenticate the user , on successful login the server returns us an authenticated token back to the client 
+59.8000 : auth/token/login 
+60.username : admin 
+   password : admin
+61.It returns us an auth_token in response once the user is authenticated
+62.Now going back on to the frontend side we have 2 tasks to do i.e 
+  1.We need to add a new form that allows users to provide their username and password
+  2.We need to write a function to call the login API to authenticate the user and if the authentication is successful , server returns us an auth_token
+63.create a new file i.e api.js and here we are creating a function that makes a request to the login api end point and handle the authentication
+64.Now once the user clicks on the login button we are going to execute the login function in api.js 
+65.const [username,setUsername] = useState()
+   initially username is et to "" and onChange setUsername gets executed and is updataed with a new value 
+66.If we look at the url that we have passed in fetch , we have only passed the route but not the domain name i.e 
+package.json => under "private"
+                "proxy" : "http://localhost:8000",
+By adding this line we can now make a call to the api , this automatically gets appended to the route that we have passed in fetch 
+67.When you make any internal chnages in the react application then make sure to re run the server
+68.Sometimes localhost may not work so instead use 127.0.0.1 and make sure to enable CORPS on both servers to allow requests
+69.summary :
+Creating a form and connecting it with the api , onsuccessful login server returns us an auth_token , on failed attempt we have to display an error message
+React Context : 
+1.Basically the idea is , we have a parent component called ProductList and it has 3 child components i.e ProducForm Product and Total and productForm has a child component Avatar i.e 
+                        ProductList 
+   value = 'Leo'          ^  ^  ^ 
+                          ^   ^   ^
+                         ^    ^    ^
+                        ^     ^     ^
+                       ^      ^      ^     
+                ProductForm Product  Total
+                    ^
+                    ^
+                    ^
+                  Avatar
+2.We will create a react context to store the global value Leo in this case and drop the parent component inside the context provider with this all the child components under the parent component will have access to the global value without the need for parent components to props data all way down to all the children ,to implement this we have to follow 3 steps :
+  1.const MyContext = React.createContext() 
+  (creating a context object , can be done in a new file)
+  2.In the same file we will be defining the provider with the custom data (can be an object too) and functionality  
+  3.The 3rd step is to see , in which parent component we have to use this context provider so that all the child components consume the data. 
+  4.We need to surround the child components / parent component containing child components i.e it is similar to the use of BrowserRouter i.e we need to follow the enclosing style
+  5.Usage in child components : 
+    const globalObj = useContext(MyContext)
+    console.log(globalObj.data)
+  6.We are going to implement the same procedure for creating the react context structure for our QRMenu digital system 
+  7.So basically in our system once the user logs in the server will send the client an authenticated token , for the client to be able to make requests to the server , these requests must include the auth_token so we need to store that token and different react components can access the token without props 
+  8.We will be creating a context object called AuthContext (PlaceHolder) for the data / functions in case of access in child componenets and an AuthProvider containing the actual data / functionality and we are going to wrap the authprovider around the root i.e app component and finally all the child componenets which require access to the auth_token connect to the AuthContext and get its value 
+  9.We will create a new file called AuthContext.js and here we will be defining a authcontext and authprovider 
+  10.App.js is the best place beacuse here we will be defining all the routes for the componenets so that all compoenents gets covered and these componenets now have access to the global data avilable via AuthContext
+  11.using this auth_token we will check whether the user is currently logged in , if yes then we will allow the user to perform the actions else we will redirect the user to login / registration page 
+70.Now we will be creating our context sharing data  related to user for auth_token to be used across all the react components
+71.contexts 
+      AuthContext
+72.We want our places route to be protected i.e accessible to only authenticated users , so we need to figure out a way to access the token from the authcontext and validate it , if validated successfully we will allow the user to places otherwise we will redirect the user to login page / registration page 
+73.First we have to create a private route 
+   router 
+      PrivateRouter.js
+74.When defining the Routes we render the components in between the tags , also we use the render method present with in the <Route> inorder to branch the routing mechanism based on token
+75.In authcontext we need to implement the signin and signout process , doing so we can manage the auth_token , also we are going to handle the login status so that is the login status is true we will be dispalying a processing spinner and if is false we just hide it
+76.Functions that communicate with the server are reffered to as async functions and need to marked with async keyword
+77.In class based components we have : 
+ 1.state and seState() to initialize and modify the data and rerender the components   
+78.In function based components we have : 
+  1.const [Variable,function] = useState()
+  so here useState is used to initialize the component and function is used to modify and rerender the component (the function takes the Variable as its first argument)
+79.callback is just like any other function , that you want to execute after something has happened i.e you have written a method to greet the user after his successful login and you can wrap this message inside a function so you can pass that message as a callback function and you want to execute it after user logs in successfully
+80.useEffect hook method/function is going to run first when the compoenent is rendered and every time the state of the component is changed this method is going to be called
+81.we use useHistory hook to navigate to different pages with in the application
+82.We have created a branch i.e a condition on the button content so initially it is false but as soon as the user clicks on the button the content of the button start changing to a spinner
+83.We need to generalise the function Login so that it handles both login and registration i.e we are actually abstracting the data that is sent to the server instead of writing username and password we are encapsulating them inside of an object data and passing to the server
+84.We can always access the arguements passed inside of an object as keyword arguments , note always set default value to arguements passed via objects 
+85.Whenever a new user registers , server responds with an id , which we can use as a confirmation of creation of new user 
+85.Lets say we want to render 2 buttons / links i.e login and register based on a condition , so we can wrap them in an array separated by a comma
+86.In the places page we are going to add few places i.e restaurants belonging to the owner , the owner can have one or multiple restaurants in different locations , so to add a new place we click in the add new place button , a form pops up on the screen asking for name and image  , once we click on the add button the new place gets added onto the places page , also we upload these images to the cloud  
+87.Django import statements : 
+   from django.db import models
+   from django.contrib.auth.models import User 
+(AuthContext.Provider is responsible for determining accessibility of data to the components)
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+1.Whenever you download and want to run any react app , the first step that you have to follow is to run the command : npm install , this 
+  command will basically install all the dependencies that the project needs  
+
+2.Structure for react router : 
+  1.Contexts go on top
+  2.Browser router
+  (MainLayout)
+    3.Routes
+  (/MainLayout)
+
+3.When we customize the defuat user model in django , we have update its related serializers as well , because it always defaults to django'
+  built in user model 
+
+4.During the customization of user model we have to set the fields up on the user object i.e self.user_model('here') , the same follows for 
+  the creation of super user as well 
+
+5.More importantly we have to set the USERNAME_FIELD = 'email' to a column name i.e a string it shouldn't be enclosed inside a list 
+
+6.Follow the previous approach (i.e bloapp) for customizing the user model
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+1.value is basically an attribute in the context , hence can not be destructured , value assigned to it can be destructured
+
+2.In the development phase , we need to set the proxy value to server in package.json file and use all the relative addresses when 
+  referring to the API's but in the production phase we have to unset the proxy value from package.json and use an absolute address 
+  when refering to the API's 
+
+Does change in context rerender the components ?
+
+3.Yes, a change in a React context can trigger a re-render of components that are consuming that context
+  React context provides a way to share data between components without passing props explicitly through the component tree ,
+  When a component subscribes to a context using the useContext hook or the Context.Consumer component, it will be re-rendered 
+  whenever the value of the context changes
+
+4.We are now going to style the react components using a library called styled-components   
+
+5.cmd : npm i styled-components@5.2.3 -s
+
+6.Modal component basically dont appear on UI unless its show attribute is set to true and it disappears from the UI when we click 
+  outside or when the show property is set to false , optionally we can have close button on topright of the component to manually 
+  set the show property to false , however at the end the show attribute must be made false in order to move it away from the UI
+
+  (i.e We have to handle the attributes i.e show and onHide of Modal component)
+
+7.If you want to set a state variable to a different value based on condition , then simply define separate methods and alter the 
+  state inthose methods 
+
+8.cloudinary.com -> settings -> upload -> add upload presets -> Give it a name 
+                                                             -> Signing Mode : Unsigned 
+                                                             -> Gite it a folder name 
+                                                             -> Save 
+
+9.Dropzone = It allows users to drag and drop the images/files 
+
+10.cmd : npm i react-dropzone
+
+11.In Bootstrap, a jumbotron is a versatile, large container used to highlight key content on a web page , It is a prominent feature
+   that helps draw attention to important messages, images, or calls to action , the jumbotron component provides a visually 
+   appealing and attention-grabbing section for displaying featured content , It typically spans the full width of the viewport 
+   and has generous padding and a large, bold heading. It is often used at the top of a page or as a banner section.
+
+12.We can not just upload img type for img tag instead we can have gif types as well
+
+13.To center an element in a box both horizontally and vertically we can write the code as : 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    (This applies to even text inside the div because even text is treated as a children)
+
+14.React-Icons is one of the popular libraries for icons 
+
+15.cmd : npm i react-icons 
+
+16. The Form.Label component is used to display the label for the form control
+    The Form.Control represents the actual form control (in this case, a text input)
+    The Form.Text component is used to provide additional helper text or instructions
+
+17.The Form.Group component itself does not add a new line in React
+   The Form.Group component is used to group form controls together and provide a visual grouping or container for them, but it 
+   does not introduce line breaks or new lines
+
+18.By default, form controls rendered within a Form.Group component will be displayed in a vertical layout, stacked on top of each 
+  other , Each form control will take up its own line within the group
+
+19.The primary use cases of useRef in React are : 
+   
+   1.Referencing DOM elements: You can use useRef to get a reference to a DOM element in your component, this allows you to access 
+   and manipulate the DOM element directly, such as setting focus, measuring its dimensions, or accessing specific properties or 
+   methods.
+   
+   2.Storing mutable values: Unlike state variables, the value stored in a useRef does not trigger a re-render when it changes ,this 
+   makes it useful for storing and accessing mutable values that should persist across re-renders, such as a previous state or an 
+   arbitrary value
+
+  3.The useRef hook is a useful tool in React for referencing DOM elements and storing mutable values that need to persist across 
+   re-renders without triggering additional renders
+
+20.We use <Form.Check /> for check boxes and the value to be assigned is e.target.checked
+
+21.const Container = styled.div`
+
+                    `
+  It is like we are defining the styles for the component and all its children with out having to write css in a different file and 
+  also provides us an easy way of accessing the children 
+
+22.The best way to populate a form is to set its state variables to the relevant object's data , but at the time of creation we dont 
+   have that object , so in that case we should initialize the object as an empty object instead of having it as undefined
+
+23.As we are using the same form for both update and create operations so we need to check is we have an object , is yes call the 
+   update API else call the create API 
+
+24.Also we should be very careful about data passing to the different forms i.e we will be passing data only in case of update 
+   api call but in case of create api call we will not be passing any data 
+  
+25.For the the checkbox and radio buttons we dont have any value attribute instead we use the checked attribute 
+
+26.In situations like , data resides in parent but operation is being performed in children so how does the child let know the parent
+   about it , i.e in these cases we need to call the parent function in child such that it resets the state letting to a rerender of 
+   the component  
+
+27.1.npm install react-qr-code
+   2.We need to provide a value to the qr code , representing some location where user is going to navigate to and complete 
+     his order , we can also optionally specify the size as well using the size attribute (some customized address) , note that 
+     the address should be absolute 
+
+28.1.npm install react-to-print
+
+29.useRef = Practical usage 
+
+30.Updating a single object among different multiple objects in the state variable :
+   
+   1.Use a amp function on the state variable
+
+   2.Check if the corresponding object is present with in the state variable
+
+   3.If yes , spread the object and add the key:value pair along with the spreaded object so that the key's corresponding value 
+     gets updated (because there can not be 2 keys in the object with the same name) , don't forget to return the object
+  
+   4.If no , simply return that object 
+
+   5.Finally all objects gets returned into an array , so set this array as the arguement for the state variable
+
+31.When you use the property fixed , it remains at the same location and is not effected by scroll (cart symbol)
